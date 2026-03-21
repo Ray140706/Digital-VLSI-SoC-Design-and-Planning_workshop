@@ -1,1 +1,1 @@
-# Digital-VLSI-SoC-Design-and-Planning_workshop
+# Digital-VLSI-SoC-Design-and-Planning
