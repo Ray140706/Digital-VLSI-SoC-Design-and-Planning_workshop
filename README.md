@@ -125,9 +125,85 @@ Area of die in microns = 660.685 * 671.405 = 443587.212 Square Microns
 Commands to load floorplan def in magic in another terminal
 
 ``
-cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/17-03_12-06/results/floorplan/
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/21-03_01-37/results/floorplan/
 ``
 
 ``
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
 ``
+
+Floorplan def in magic
+
+<center>
+    <img src="images/floorplan_def.png">
+</center>
+
+Equidistant placement of ports
+
+<center>
+    <img src="images/Equidistant pins.png">
+</center>
+
+Port layer as set through config.tcl
+
+<center>
+    <img src="images/port layer.png">
+</center>
+
+<center>
+    <img src="images/port layer(2).png">
+</center>
+
+Decap Cells and Tap Cells
+
+<center>
+    <img src="images/Decap and Tap cells.png">
+</center>
+
+Diagonally equidistant Tap cells
+
+<center>
+    <img src="images/Diagonal_tapcells.png">
+</center>
+
+Unplaced standard cells at the origin
+
+<center>
+    <img src="images/unplaced standardcells.png">
+</center>
+
+4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+
+Command run placement:
+
+``
+run_placement
+``
+
+<center>
+    <img src="images/Placement_run.png">
+</center>
+
+5. Load generated placement def in magic tool and explore the placement.
+
+Commands to load placement def in magic in another terminal
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/22-03_10-56/results/placement/
+``
+
+``
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+``
+
+Floorplan def in magic
+
+<center>
+    <img src="images/placement_def.png">
+</center>
+
+Standard cells legally placed
+
+<center>
+    <img src="images/StandardCell_placement.png">
+</center>
