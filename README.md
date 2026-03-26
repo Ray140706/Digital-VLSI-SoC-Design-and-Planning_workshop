@@ -361,21 +361,21 @@ Rise transition time = Time take for output to rise 80% - Time taken for output 
 20% Screenshots
 
 <center>
-    <img src="images/20%.png">
+    <img src="images/20.png">
 </center>
 
 <center>
-    <img src="images/20%_op.png">
+    <img src="images/20_op.png">
 </center>
 
 80% Screenshots
 
 <center>
-    <img src="images/80%.png">
+    <img src="images/80.png">
 </center>
 
 <center>
-    <img src="images/80%_op.png">
+    <img src="images/80_op.png">
 </center>
 
 Rise transition time = 2.24353 - 2.18242 = 0.06111 ns = 61.11 ps
