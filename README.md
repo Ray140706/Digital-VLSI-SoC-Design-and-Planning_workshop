@@ -207,3 +207,118 @@ Standard cells legally placed
 <center>
     <img src="images/StandardCell_placement.png">
 </center>
+
+## Section 3 - Design library cell using Magic Layout and ngspice characterization
+
+1. Clone custom inverter standard cell design from github repository
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane
+``
+
+``
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+``
+
+``
+cd vsdstdcelldesign
+``
+
+``
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech .
+``
+
+``
+ls
+``
+
+``
+magic -T sky130A.tech sky130_inv.mag &
+``
+
+<center>
+    <img src="images/GitRepo_clone.png">
+</center>
+
+2. Load the custom inverter layout in magic and explore.
+
+Custom inverter layout in magic
+
+<center>
+    <img src="images/CustomInverter_Layout.png">
+</center>
+
+NMOS and PMOS identified
+
+<center>
+    <img src="images/nmos.png">
+</center>
+
+<center>
+    <img src="images/pmos.png">
+</center>
+
+Output Y connectivity to PMOS and NMOS drain verified
+
+<center>
+    <img src="images/DrainConnectivity_Y.png">
+</center>
+
+PMOS source connectivity to VDD (here VPWR) verified
+
+<center>
+    <img src="images/Vdd-source(pmos).png">
+</center>
+
+NMOS source connectivity to VSS (here VGND) verified
+
+<center>
+    <img src="images/Vss-source(nmos).png">
+</center>
+
+3. Spice extraction of inverter in magic.
+
+Commands for spice extraction of the custom inverter layout to be used in tkcon window of magic
+
+``
+pwd
+``
+
+``
+extract all
+``
+
+``
+ext2spice cthresh 0 rthresh 0
+``
+
+``
+ext2spice
+``
+
+tkcon window after running above commands
+
+<center>
+    <img src="images/spiceExtraction_inverter.png">
+</center>
+
+Created spice file
+
+<center>
+    <img src="images/SpiceFile.png">
+</center>
+
+4. Editing the spice model file for analysis through simulation.
+
+Measuring unit distance in layout grid
+
+<center>
+    <img src="images/Layout_unitDistance.png">
+</center>
+
+Final edited spice file ready for ngspice simulation
+
+<center>
+    <img src="images/SpiceFile_edited.png">
+</center>
+
