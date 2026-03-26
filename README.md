@@ -337,17 +337,17 @@ plot y vs time a
  ngspice run
 
  <center>
-    <img src="images/ngpice run.png">
+    <img src="images/ngspice run.png">
 </center>
 
 <center>
-    <img src="images/ngpice run(1).png">
+    <img src="images/ngspice run(1).png">
 </center>
 
 Generated plot
 
 <center>
-    <img src="ngspice_plot.png">
+    <img src="images/ngspice_plot.png">
 </center>
 
 Rise transition time calculation
@@ -361,21 +361,21 @@ Rise transition time = Time take for output to rise 80% - Time taken for output 
 20% Screenshots
 
 <center>
-    <img src="20%.png">
+    <img src="images/20%.png">
 </center>
 
 <center>
-    <img src="20%_op.png">
+    <img src="images/20%_op.png">
 </center>
 
 80% Screenshots
 
 <center>
-    <img src="80%.png">
+    <img src="images/80%.png">
 </center>
 
 <center>
-    <img src="80%_op.png">
+    <img src="images/80%_op.png">
 </center>
 
 Rise transition time = 2.24353 - 2.18242 = 0.06111 ns = 61.11 ps
