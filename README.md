@@ -380,5 +380,13 @@ Rise transition time = Time take for output to rise 80% - Time taken for output 
 
 Rise transition time = 2.24353 - 2.18242 = 0.06111 ns = 61.11 ps
 
+Fall transition time = 4.0955 - 4.0536 = 0.0419 ns = 41.9 ps
+
+Rise cell delay = Time taken for output to rise to 50% - Time taken for input to fall to 50%
+
+50% 0f 3.3V = 1.65V
+
+50% Screenshots
+
 
 
