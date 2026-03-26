@@ -322,3 +322,63 @@ Final edited spice file ready for ngspice simulation
     <img src="images/SpiceFile_edited.png">
 </center>
 
+5. Post-layout ngspice simulations
+
+Commands for ngspice simulation
+
+``
+ngspice sky130_inv.spice
+``
+
+``
+plot y vs time a
+``
+
+ ngspice run
+
+ <center>
+    <img src="images/ngpice run.png">
+</center>
+
+<center>
+    <img src="images/ngpice run(1).png">
+</center>
+
+Generated plot
+
+<center>
+    <img src="ngspice_plot.png">
+</center>
+
+Rise transition time calculation
+
+Rise transition time = Time take for output to rise 80% - Time taken for output to rise 20%
+
+20% of output = 660mV
+
+80% of output = 2.64V
+
+20% Screenshots
+
+<center>
+    <img src="20%.png">
+</center>
+
+<center>
+    <img src="20%_op.png">
+</center>
+
+80% Screenshots
+
+<center>
+    <img src="80%.png">
+</center>
+
+<center>
+    <img src="80%_op.png">
+</center>
+
+Rise transition time = 2.24353 - 2.18242 = 0.06111 ns = 61.11 ps
+
+
+
