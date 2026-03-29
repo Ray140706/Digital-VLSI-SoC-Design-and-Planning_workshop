@@ -710,3 +710,89 @@ run_synthesis
     <img src="images/synth_inverter.png">
 </center>
 
+7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+
+Current design values generated before modifying parameters to improve timing
+
+<center>
+    <img src="images/synth_inverter(init).png">
+</center>
+
+<center>
+    <img src="images/synth_inverter.png">
+</center>
+
+Commands to view and change parameters to improve timing and run synthesis
+
+``
+prep -design picorv32a -tag 25-03_16-27 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+echo $::env(SYNTH_STRATEGY)
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+echo $::env(SYNTH_BUFFERING)
+echo $::env(SYNTH_SIZING)
+set ::env(SYNTH_SIZING) 1
+echo $::env(SYNTH_DRIVING_CELL)
+run_synthesis
+``
+
+ Area has increased and worst negative slack has become 0
+
+
+<center>
+    <img src="images/inv_newArea.png">
+</center>
+
+
+<center>
+    <img src="images/inv_new.png">
+</center>
+
+8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+
+Commands to run the floorplan
+
+``
+init_floorplan
+place_io
+tap_decap_or
+``
+
+Command to run placement
+
+``
+run placement
+``
+
+Commands to load placement def in magic
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/25-03_16-27/results/placement/
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+``
+
+Placement def in magic
+
+
+<center>
+    <img src="images/def(inv).png">
+</center>
+
+
+<center>
+    <img src="images/inv_placement.png">
+</center>
+
+Command for tkcon window to view internal layers of cells
+
+``
+expand
+``
+
+Abutment of power pins with other cell from library
+
+<center>
+    <img src="images/inv_powerpins.png">
+</center>
+
