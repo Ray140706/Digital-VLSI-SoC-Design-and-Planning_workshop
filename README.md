@@ -386,7 +386,333 @@ Rise cell delay = Time taken for output to rise to 50% - Time taken for input to
 
 50% 0f 3.3V = 1.65V
 
+Fall Cell Delay = 4.07 - 4.05 = 0.02 ns = 20ps
+
 50% Screenshots
 
+<center>
+    <img src="images/50.png">
+</center>
 
+<center>
+    <img src="images/50_op.png">
+</center>
+
+6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+
+Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
+
+``
+cd
+``
+
+``
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+``
+
+``
+tar xfz drc_tests.tgz
+``
+
+``
+cd drc_tests
+``
+
+``
+ls -al
+``
+
+``
+gvim .magicrc
+``
+
+``
+magic -d XR &
+``
+
+<center>
+    <img src="images/drc_cmds.png">
+</center>
+
+.magicrc file
+
+<center>
+    <img src="images/magicrc_file.png">
+</center>
+
+Incorrectly implemented poly.9 simple rule correction
+
+ No drc violation even though spacing < 0.48u
+
+ <center>
+    <img src="images/poly.9.png">
+</center>
+
+New commands inserted in sky130A.tech file to update drc
+
+ <center>
+    <img src="images/drc_update(1).png">
+</center>
+
+ <center>
+    <img src="images/drc_update(2).png">
+</center>
+
+Commands to run in tkcon window
+
+``
+tech load sky130A.tech
+``
+
+``
+drc check
+``
+
+``
+drc why
+``
+
+ <center>
+    <img src="images/poly_update.png">
+</center>
+
+Incorrectly implemented difftap.2 simple rule correction
+
+ No drc violation even though spacing < 0.42u
+
+ <center>
+    <img src="images/difftap.2.png">
+</center>
+
+New commands inserted in sky130A.tech file to update drc
+
+<center>
+    <img src="images/difftap.2_drc(update).png">
+</center>
+
+<center>
+    <img src="images/difftap(updated).png">
+</center>
+
+Incorrectly implemented nwell.4 complex rule correction
+
+ No drc violation even though no tap present in nwell
+
+ <center>
+    <img src="images/nwell_incorrect.png">
+</center>
+
+New commands inserted in sky130A.tech file to update drc
+
+ <center>
+    <img src="images/nwell.4_drcUpdate.png">
+</center>
+
+ <center>
+    <img src="images/nwell.4_drcUpdate(2).png">
+</center>
+
+``
+Commands to run in tkcon window
+``
+
+``
+tech load sky130A.tech
+``
+
+``
+drc style drc(full)
+``
+
+``
+drc check
+``
+
+``
+drc why
+``
+
+<center>
+    <img src="images/nwell(updated).png">
+</center>
+
+## Section 4 - Pre-layout timing analysis and importance of good clock tree
+
+1. Fix up small DRC errors and verify the design is ready to be inserted into the flow.
+
+Conditions to be verified before moving forward with custom designed cell layout:
+
+Condition 1: The input and output ports of the standard cell should lie on the intersection of the vertical and horizontal tracks.
+
+Condition 2: Width of the standard cell should be odd multiples of the horizontal track pitch.
+
+Condition 3: Height of the standard cell should be even multiples of the vertical track pitch.
+
+Commands to open the custom inverter layout
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+``
+
+``
+magic -T sky130A.tech sky130_inv.mag &
+``
+
+tracks.info of sky130_fd_sc_hd
+
+<center>
+    <img src="images/tracks.info(sky130_fd_sc_hd).png">
+</center>
+
+Commands for tkcon window to set grid 
+
+``
+help grid
+``
+
+``
+grid 0.46um 0.34um 0.23um 0.17um
+``
+
+<center>
+    <img src="images/gridSetting.png">
+</center>
+
+Condition 1 verified
+
+<center>
+    <img src="images/Inverter_condn1.png">
+</center>
+
+Condition 2 verified
+
+<center>
+    <img src="images/Inverter_condn2.png">
+</center>
+
+Horizontal track pitch = 0.46 um
+
+Width of standard cell = 1.38 um = 0.46 * 3
+
+Condition 3 verified
+
+<center>
+    <img src="images/Inverter_condn3.png">
+</center>
+
+Vertical track pitch = 0.34 um 
+
+Height of standard cell = 2.72 um = 0.34 * 8
+
+2. Save the finalized layout with custom name and open it.
+
+Command for tkcon window to save the layout with custom name
+
+``
+save sky130_vsdinv.mag
+``
+
+Command to open the newly saved layout
+
+``
+magic -T sky130A.tech sky130_vsdinv.mag &
+``
+
+Newly saved layout
+
+<center>
+    <img src="images/Inverter_new.png">
+</center>
+
+3. Generate lef from the layout
+
+Command for tkcon window to write lef
+
+``
+lef write
+``
+
+<center>
+    <img src="images/lef_write.png">
+</center>
+
+<center>
+    <img src="images/lef_new.png">
+</center>
+
+4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+
+Commands to copy necessary files to 'picorv32a' design 'src' directory
+
+``
+cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+``
+
+``
+ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+``
+
+``
+cp libs/sky130_fd_sc_hd__* ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+``
+
+``
+ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+``
+
+<center>
+    <img src="images/lef_copy.png">
+</center>
+
+5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+
+Commands to be added to config.tcl to include our custom cell in the openlane flow
+
+``
+set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+``
+
+Edited config.tcl to include the added lef and change library to ones we added in src directory
+
+
+<center>
+    <img src="images/config_edited.png">
+</center>
+
+6. Run openlane flow synthesis with newly inserted custom inverter cell.
+
+Commands to invoke the OpenLANE flow include new lef and perform synthesis
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+``
+
+``
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+run_synthesis
+``
+
+
+<center>
+    <img src="images/inverter_prep.png">
+</center>
+
+
+<center>
+    <img src="images/config_edited.png">
+</center>
+
+
+<center>
+    <img src="images/synth_inverter.png">
+</center>
 
