@@ -706,12 +706,6 @@ run_synthesis
     <img src="images/inverter_prep.png">
 </center>
 
-
-<center>
-    <img src="images/config_edited.png">
-</center>
-
-
 <center>
     <img src="images/synth_inverter.png">
 </center>
