@@ -795,3 +795,45 @@ Abutment of power pins with other cell from library
     <img src="images/inv_powerpins.png">
 </center>
 
+### 9. Do Post-Synthesis timing analysis with OpenSTA tool.
+
+Commands to add new lef to OpenLANE flow
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+set ::env(SYNTH_SIZING) 1
+run_synthesis
+``
+
+Commands to run STA 
+
+``
+cd Desktop/work/tools/openlane_working_dir/openlane
+sta pre_sta.conf
+``
+
+<center>
+    <img src="images/newlef_STA(1).png">
+</center>
+
+<center>
+    <img src="images/newlef_STA(2).png">
+</center>
+
+<center>
+    <img src="images/newlef_STA(3).png">
+</center>
+
+<center>
+    <img src="images/newlef_STA(4).png">
+</center>
+
+### 10. Make timing ECO fixes to remove all violations.
+
+
