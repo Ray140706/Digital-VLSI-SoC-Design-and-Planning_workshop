@@ -1,8 +1,8 @@
 # Digital-VLSI-SoC-Design-and-Planning
 ## Section 1 - Inception of open-source EDA, OpenLANE and Sky130 PDK
-1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
+### 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
 
-Commands to invoke the OpenLANE flow and perform synthesis
+Commands to invoke the OpenLANE flow and perform synthesis:
 
 ``
 cd Desktop/work/tools/openlane_working_dir/openlane
@@ -42,7 +42,7 @@ Screenshots:
     <img src="images/synthesis.png">
 </center>
 
-2. Calculate the flop ratio.
+### 2. Calculate the flop ratio.
 
 <center>
     <img src="images/synth_report.png">
@@ -58,7 +58,7 @@ Percentage of DFF's = 0.108429685 * 100 = 10.8429685%
 
 ## Section 2 - Good floorplan vs bad floorplan and introduction to library cells
 
-1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
+### 1. Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 
 Commands to invoke the OpenLANE flow and perform floorplan
 
@@ -101,7 +101,7 @@ run_floorplan
     <img src="images/floorplan.png">
 </center>
 
-2. Calculate the die area in microns from the values in floorplan def.
+### 2. Calculate the die area in microns from the values in floorplan def.
 
 <center>
     <img src="images/floorplan_file.png">
@@ -119,7 +119,7 @@ Die height in microns = 671405/1000 = 671.405 Microns
 
 Area of die in microns = 660.685 * 671.405 = 443587.212 Square Microns
 
-3. Load generated floorplan def in magic tool and explore the floorplan.
+### 3. Load generated floorplan def in magic tool and explore the floorplan.
 
 Commands to load floorplan def in magic in another terminal
 
@@ -171,7 +171,7 @@ Unplaced standard cells at the origin
     <img src="images/unplaced standardcells.png">
 </center>
 
-4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+### 4. Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
 
 Command run placement:
 
@@ -183,7 +183,7 @@ run_placement
     <img src="images/Placement_run.png">
 </center>
 
-5. Load generated placement def in magic tool and explore the placement.
+### 5. Load generated placement def in magic tool and explore the placement.
 
 Commands to load placement def in magic in another terminal
 
@@ -209,7 +209,7 @@ Standard cells legally placed
 
 ## Section 3 - Design library cell using Magic Layout and ngspice characterization
 
-1. Clone custom inverter standard cell design from github repository
+### 1. Clone custom inverter standard cell design from github repository
 
 ``
 cd Desktop/work/tools/openlane_working_dir/openlane
@@ -239,7 +239,7 @@ magic -T sky130A.tech sky130_inv.mag &
     <img src="images/GitRepo_clone.png">
 </center>
 
-2. Load the custom inverter layout in magic and explore.
+### 2. Load the custom inverter layout in magic and explore.
 
 Custom inverter layout in magic
 
@@ -275,7 +275,7 @@ NMOS source connectivity to VSS (here VGND) verified
     <img src="images/Vss-source(nmos).png">
 </center>
 
-3. Spice extraction of inverter in magic.
+### 3. Spice extraction of inverter in magic.
 
 Commands for spice extraction of the custom inverter layout to be used in tkcon window of magic
 
@@ -307,7 +307,7 @@ Created spice file
     <img src="images/SpiceFile.png">
 </center>
 
-4. Editing the spice model file for analysis through simulation.
+### 4. Editing the spice model file for analysis through simulation.
 
 Measuring unit distance in layout grid
 
@@ -321,7 +321,7 @@ Final edited spice file ready for ngspice simulation
     <img src="images/SpiceFile_edited.png">
 </center>
 
-5. Post-layout ngspice simulations
+### 5. Post-layout ngspice simulations
 
 Commands for ngspice simulation
 
@@ -397,7 +397,7 @@ Fall Cell Delay = 4.07 - 4.05 = 0.02 ns = 20ps
     <img src="images/50_op.png">
 </center>
 
-6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+### 6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
 
 Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
 
@@ -537,7 +537,7 @@ drc why
 
 ## Section 4 - Pre-layout timing analysis and importance of good clock tree
 
-1. Fix up small DRC errors and verify the design is ready to be inserted into the flow.
+### 1. Fix up small DRC errors and verify the design is ready to be inserted into the flow.
 
 Conditions to be verified before moving forward with custom designed cell layout:
 
@@ -603,7 +603,7 @@ Vertical track pitch = 0.34 um
 
 Height of standard cell = 2.72 um = 0.34 * 8
 
-2. Save the finalized layout with custom name and open it.
+### 2. Save the finalized layout with custom name and open it.
 
 Command for tkcon window to save the layout with custom name
 
@@ -623,7 +623,7 @@ Newly saved layout
     <img src="images/Inverter_new.png">
 </center>
 
-3. Generate lef from the layout
+### 3. Generate lef from the layout
 
 Command for tkcon window to write lef
 
@@ -639,7 +639,7 @@ lef write
     <img src="images/lef_new.png">
 </center>
 
-4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+### 4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
 
 Commands to copy necessary files to 'picorv32a' design 'src' directory
 
@@ -663,7 +663,7 @@ ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
     <img src="images/lef_copy.png">
 </center>
 
-5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+### 5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
 
 Commands to be added to config.tcl to include our custom cell in the openlane flow
 
@@ -682,7 +682,7 @@ Edited config.tcl to include the added lef and change library to ones we added i
     <img src="images/config_edited.png">
 </center>
 
-6. Run openlane flow synthesis with newly inserted custom inverter cell.
+### 6. Run openlane flow synthesis with newly inserted custom inverter cell.
 
 Commands to invoke the OpenLANE flow include new lef and perform synthesis
 
@@ -709,7 +709,7 @@ run_synthesis
     <img src="images/synth_inverter.png">
 </center>
 
-7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+### 7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
 
 Current design values generated before modifying parameters to improve timing
 
@@ -748,7 +748,7 @@ run_synthesis
     <img src="images/inv_new.png">
 </center>
 
-8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+### 8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
 
 Commands to run the floorplan
 
