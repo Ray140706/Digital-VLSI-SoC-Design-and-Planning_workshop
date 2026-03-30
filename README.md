@@ -1188,4 +1188,15 @@ report_checks -path_delay min_max -fields {slew trans net cap input_pins} -forma
 exit
 ```
 
+<center>
+    <img src="images/Post-route_STA(1).png">
+</center>
+
+<center>
+    <img src="images/Post-route_STA(2).png">
+</center>
+
+<center>
+    <img src="images/Post-route_STA(3).png">
+</center>
 
